@@ -1,0 +1,25 @@
+{
+  "name": "string-combiner",
+  "version": "0.0.1",
+  "description": "A node.js module for combining strings",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xntricweb/string-combiner.git"
+  },
+  "keywords": [
+    "string",
+    "parse",
+    "replace",
+    "combine"
+  ],
+  "author": "xntricweb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xntricweb/string-combiner/issues"
+  },
+  "homepage": "https://github.com/xntricweb/string-combiner#readme"
+}
