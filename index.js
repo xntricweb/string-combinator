@@ -1,6 +1,3 @@
-
-let [dStart, dStop, szdStart, szdStop] = ["{{", "}}", 2, 2];
-
 module.exports = combinator;
 module.exports.combine = combine;
 module.exports.combineObject = combineObject;
@@ -9,8 +6,8 @@ module.exports.getDelimiters = getDelimiters;
 module.exports.combinePools = combinePools;
 module.exports.setDefaultPool = setDefaultPool;
 module.exports.getDefaultPool = getDefaultPool;
-let defaultPool = process.env;
 
+let defaultPool = process.env;
 /**
  * Returns the default pool.
  * @return {object} the current default pool
@@ -27,10 +24,11 @@ function getDefaultPool() {
  * @return {object}         The new default pool.
  */
 function setDefaultPool(...pools) {
-  defaultPool = combinePools(true, ...pools);
+  defaultPool = combinePools(...pools);
   return getDefaultPool();
 }
 
+let [dStart, dStop, szdStart, szdStop] = ["{{", "}}", 2, 2];
 /**
  * Used to set or get the token deliminators for parsing functions.
  *
@@ -74,8 +72,8 @@ function combineObject(obj, pool) {
       res[i] = val;
     } else if (typeof val === "object") {
       if (val === obj) res[i] = val;
-      else res[i] = combineObject(pool, val);
-    } else res[i] = combine(pool, val.toString());
+      else res[i] = combineObject(val, pool);
+    } else res[i] = combine(val, pool);
   }
   return res;
 }
@@ -91,12 +89,16 @@ function combineObject(obj, pool) {
  * @param  {Number} si    The index to begin searching from within the string
  * @return {object}        A copy of the string detokenized.
  */
-function combine(str, pool, si = 0) {
+function combine(str, pool = defaultPool, si = 0) {
   // check to make sure val is a string... if
   if (str === undefined || str === null) return str;
-  if (typeof str === 'object') return combineObject(pool, str);
   if (str.toString) str = str.toString();
   else return str;
+
+  if (typeof pool === 'number') {
+    si = pool;
+    pool = defaultPool;
+  }
 
   while (si > -1) {
     si = str.indexOf(dStart, si);
@@ -127,12 +129,8 @@ function combine(str, pool, si = 0) {
  * @return {object}        A copy of the string detokenized.
  */
 function combinator(str, pool, si = 0) {
-  if (typeof pool === 'number') {
-    pool = undefined;
-    si = pool;
-  }
-
-  return combine(str, pool || defaultPool, si);
+  if (typeof str === 'object') return combineObject(str, pool);
+  return combine(str, pool, si);
 }
 
 /**
@@ -152,5 +150,5 @@ function combinePools(...pools) {
       pool_[i] = pool[i].toString();
   });
 
-  return recombine ? combine(pool_, pool_) : pool_;
+  return recombine ? combineObject(pool_, pool_) : pool_;
 }
