@@ -14,3 +14,12 @@ let simplePool = {
   key2: "value2"
 };
 ```
+
+combine a string with the pool
+```javascript
+let result = combine('key1 is {{key1}}, and key2 is {{key2}}');
+console.log(result);
+```
+
+which would output::
+    key1 is value1, and key2 is value2
