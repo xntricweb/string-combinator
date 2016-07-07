@@ -31,6 +31,8 @@ key1 is value1, and key2 is value2
 A pool is an object which contains key/value pairs which will potentially be inserted into a string at some point.
 
 #The Default Pool
+The default pool is persistent to the combinator object, modifying it in any module will affect all modules. This behavior is intentional. It allows a common pool to be used accross modules without having to pass the pool around. To use a specific pool in a particular module, you can supply the pool to the combine statement and it will not pull values from the default pool.
+
 ```javascript
 let combinator = require('string-combinator');
 combinator.setDefaultPool(
