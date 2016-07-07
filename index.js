@@ -1,17 +1,23 @@
 
 let [dStart, dStop, szdStart, szdStop] = ["{{", "}}", 2, 2];
-let defaultPool = process.env;
 
-module.exports = combineMaster;
+module.exports = combinator;
+module.exports.combine = combine;
+module.exports.combineObject = combineObject;
 module.exports.setDelimiters = setDelimiters;
 module.exports.getDelimiters = getDelimiters;
 module.exports.combinePools = combinePools;
-
 module.exports.setDefaultPool = setDefaultPool;
+module.exports.getDefaultPool = getDefaultPool;
+let defaultPool = process.env;
 
-module.exports.getDefaultPool = function() {
+/**
+ * Returns the default pool.
+ * @return {object} the current default pool
+ */
+function getDefaultPool() {
   return defaultPool;
-};
+}
 
 /**
  * Set the default pool.
@@ -22,7 +28,7 @@ module.exports.getDefaultPool = function() {
  */
 function setDefaultPool(...pools) {
   defaultPool = combinePools(true, ...pools);
-  return defaultPool;
+  return getDefaultPool();
 }
 
 /**
@@ -120,7 +126,7 @@ function combine(str, pool, si = 0) {
  * @param  {Number} si    The index to begin searching from within the string
  * @return {object}        A copy of the string detokenized.
  */
-function combineMaster(str, pool, si = 0) {
+function combinator(str, pool, si = 0) {
   if (typeof pool === 'number') {
     pool = undefined;
     si = pool;

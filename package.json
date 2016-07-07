@@ -21,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/xntricweb/string-combiner/issues"
   },
-  "homepage": "https://github.com/xntricweb/string-combiner#readme"
+  "homepage": "https://github.com/xntricweb/string-combiner#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.0.1",
+    "eslint-config-google": "^0.6.0"
+  }
 }
