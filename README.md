@@ -76,4 +76,9 @@ let combinator = require('string-combinator');
 let {combinator} = require('string-combinator');
 let combinator = require('string-combainator').combinator;
 ```
-Combinator is a function that can 
+
+#\#combineObject
+see tests for usage
+
+#\#Delimiters
+see test for usage
