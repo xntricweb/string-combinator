@@ -1,5 +1,5 @@
 {
-  "name": "string-combiner",
+  "name": "string-combinator",
   "version": "0.0.1",
   "description": "A node.js module for combining strings",
   "main": "index.js",
