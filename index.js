@@ -1,4 +1,4 @@
-module.exports = combinator;
+module.exports.combinator = module.exports = combinator;
 module.exports.combine = combine;
 module.exports.combineObject = combineObject;
 module.exports.setDelimiters = setDelimiters;
